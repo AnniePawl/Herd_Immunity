@@ -75,7 +75,53 @@ class Simulation(object):
             population.append(new_person)
         return population
 
-    
+    def _simulation_should_continue(self):
+        ''' The simulation should only end if the entire population is dead
+        or everyone is vaccinated.
+            Returns:
+                bool: True for simulation should continue, False if it should end.
+        '''
+
+        for person in self.population:
+            if person.is_alive == True and person.is_vaccinated = False:
+                return True
+        return False
+
+    def run(self):
+        ''' This method should run the simulation until all requirements for ending
+        the simulation are met.
+        '''
+        # TODO: Keep track of the number of time steps that have passed.
+        # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
+
+        time_step_counter = 0
+
+        while self._simulation_should_continue():
+            self.time_step()
+        print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+
+    def time_step(self):
+        ''' This method should contain all the logic for computing one time step
+        in the simulation.
+        This includes:
+            1. 100 total interactions with a randon person for each infected person
+                in the population
+            2. If the person is dead, grab anotherr random person from the population.
+                Since we don't interact with dead people, this does not count as an interaction.
+            3. Otherwise call simulation.interaction(person, random_person) and
+                increment interaction counter by 1.
+            '''
+
+        for person in self.population:
+            if person.infection is not None:
+                for x in range(100):
+                    random_person = random.choice(self.population)
+                    while random_person.is_alive = False:
+                        random_person = random.choice(self.population)
+                    self.interaction(person, random_person)
+                    time_step_counter += 1
+
+
 
 
 if __name__ == "__main__":
