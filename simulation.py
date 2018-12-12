@@ -58,6 +58,24 @@ class Simulation(object):
         # people vaccinated, correct number of initially infected people)
         # Use the attributes created in the init method to create a population that has
         # the correct intial vaccination percentage and initial infected.
+        population = []
+        num_vaccinted = int(self.pop_size * self.vacc_percentage)
+        num_not_vaccinated = int(self.pop_size - num_vaccinted - self.initial_infected)
+
+        for x in range(num_not_vaccinated):
+            new_person = Person(x, False)
+            population.append(new_person)
+
+        for x in range(num_vaccinted):
+            new_person = Person(x + num_not_vaccinated, True)
+            population.append(new_person)
+
+        for x in range (self.initial_infected):
+            new_person = Person(x + num_not_vaccinated + num_vaccinted, False, self.virus)
+            population.append(new_person)
+        return population
+
+    
 
 
 if __name__ == "__main__":
