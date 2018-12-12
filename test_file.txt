@@ -1,0 +1,6 @@
+Parameters:100	0.2	AIDS	0.03	0.4
+1 did infect 2
+1 did not infect 2 because vaccinated
+1 did not infect 2 because already infected
+1 died
+1 survived infection

@@ -24,6 +24,7 @@ class Person(object):
         random_variable = random.uniform(0,1)
         if random_variable  < self.infection.mortality_rate:
             self.is_alive = False
+            self.infection = None
             return False
         else:
             self.is_vaccinated = True
