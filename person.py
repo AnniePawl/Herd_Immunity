@@ -5,26 +5,14 @@ from virus import Virus
 
 class Person(object):
     ''' Person objects will populate the simulation. '''
-
     def __init__(self, _id, is_vaccinated, infection=None):
-        ''' We start out with is_alive = True, because we don't make vampires or zombies.
-        All other values will be set by the simulation when it makes each Person object.
-        If person is chosen to be infected when the population is created, the simulation
-        should instantiate a Virus object and set it as the value self.infection. Otherwise, self.infection should be set to None.
-        '''
-
         self._id = _id
         self.is_vaccinated = is_vaccinated
-        self.infection = infected
+        self.infection = infection
         self.is_alive = True
 
-
-        self._id = None  # int
-        self.is_alive = True  # boolean
-        self.is_vaccinated = None  # boolean
-        self.infection = None  # Virus object or None
-
     def did_survive_infection(self):
+
         ''' Generate a random number and compare to virus's mortality_rate.
         If random number is smaller, person dies from the disease.
         If Person survives, they become vaccinated and they have no infection.
@@ -32,17 +20,15 @@ class Person(object):
         '''
         # Only called if infection attribute is not None.
         # TODO:  Finish this method. Should return a Boolean
-        pass
-
-        def did_survive_infection(self):
-            if self.infection != None:
-                random_number =  random.uniform(0, 1)
-                if random_number < self.infection.mortality_rate:
-                    self.is_alive = False
-                    # self.infected = None
-                elif random_number > self.infection.mortality_rate:
-                    self.is_vaccinated = True
-                    self.infected = None
+        assert self.infection is not None
+        random_variable = random.uniform(0,1)
+        if random_variable  < self.infection.mortality_rate:
+            self.is_alive = False
+            return False
+        else:
+            self.is_vaccinated = True
+            self.infection = None
+            return True
 
 
 ''' These are simple tests to ensure that you are instantiating your Person class correctly. '''
@@ -53,6 +39,7 @@ def test_vacc_person_instantiation():
     assert person.is_alive is True
     assert person.is_vaccinated is True
     assert person.infection is None
+    print("test_vacc_person_instantiation passed!")
 
 
 def test_not_vacc_person_instantiation():
@@ -94,3 +81,5 @@ def test_did_survive_infection():
         # the values of each attribute for a Person who did not survive
         # assert ...
         pass
+
+test_vacc_person_instantiation()
